@@ -15,7 +15,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DataTable } from "@/components/table_logic/data-table";
-import { columns } from "@/components/table_logic/columns";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -34,19 +33,10 @@ function HomeComponent() {
     phone_number: 0,
   };
 
-  const accountType = {
-    id: "",
-    email: "",
-    password: "",
-    account_type: "",
-    business_affiliated: "",
-    company_role: "",
-  };
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["businesses"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("Accounts").select("*");
+      const { data, error } = await supabase.from("Businesses").select("*");
       console.log("Data:", data);
       if (error) throw error;
 
@@ -60,7 +50,7 @@ function HomeComponent() {
   return (
     <div className="p-2">
       <h2>Using this to test database connection & tables</h2>
-      <DataTable type={accountType} data={data || []} />
+      <DataTable type={businessType} data={data || []} />
       <p>{JSON.stringify(data, null, 2)}</p>
 
       <hr />

@@ -17,6 +17,7 @@ import { Route as LoginImport } from './routes/login'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as IdIndexImport } from './routes/id/index'
+import { Route as IdUsersImport } from './routes/id/users'
 import { Route as IdDashboardImport } from './routes/id/dashboard'
 import { Route as IdLayoutImport } from './routes/id/_layout'
 
@@ -53,6 +54,12 @@ const IndexRoute = IndexImport.update({
 const IdIndexRoute = IdIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdUsersRoute = IdUsersImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => IdRoute,
 } as any)
 
@@ -113,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdDashboardImport
       parentRoute: typeof IdImport
     }
+    '/id/users': {
+      id: '/id/users'
+      path: '/users'
+      fullPath: '/id/users'
+      preLoaderRoute: typeof IdUsersImport
+      parentRoute: typeof IdImport
+    }
     '/id/': {
       id: '/id/'
       path: '/'
@@ -128,12 +142,14 @@ declare module '@tanstack/react-router' {
 interface IdRouteChildren {
   IdLayoutRoute: typeof IdLayoutRoute
   IdDashboardRoute: typeof IdDashboardRoute
+  IdUsersRoute: typeof IdUsersRoute
   IdIndexRoute: typeof IdIndexRoute
 }
 
 const IdRouteChildren: IdRouteChildren = {
   IdLayoutRoute: IdLayoutRoute,
   IdDashboardRoute: IdDashboardRoute,
+  IdUsersRoute: IdUsersRoute,
   IdIndexRoute: IdIndexRoute,
 }
 
@@ -145,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/id': typeof IdLayoutRoute
   '/id/dashboard': typeof IdDashboardRoute
+  '/id/users': typeof IdUsersRoute
   '/id/': typeof IdIndexRoute
 }
 
@@ -154,6 +171,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/id': typeof IdIndexRoute
   '/id/dashboard': typeof IdDashboardRoute
+  '/id/users': typeof IdUsersRoute
 }
 
 export interface FileRoutesById {
@@ -164,14 +182,22 @@ export interface FileRoutesById {
   '/id': typeof IdRouteWithChildren
   '/id/_layout': typeof IdLayoutRoute
   '/id/dashboard': typeof IdDashboardRoute
+  '/id/users': typeof IdUsersRoute
   '/id/': typeof IdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/login' | '/id' | '/id/dashboard' | '/id/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/login'
+    | '/id'
+    | '/id/dashboard'
+    | '/id/users'
+    | '/id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/login' | '/id' | '/id/dashboard'
+  to: '/' | '/about' | '/login' | '/id' | '/id/dashboard' | '/id/users'
   id:
     | '__root__'
     | '/'
@@ -180,6 +206,7 @@ export interface FileRouteTypes {
     | '/id'
     | '/id/_layout'
     | '/id/dashboard'
+    | '/id/users'
     | '/id/'
   fileRoutesById: FileRoutesById
 }
@@ -228,6 +255,7 @@ export const routeTree = rootRoute
       "children": [
         "/id/_layout",
         "/id/dashboard",
+        "/id/users",
         "/id/"
       ]
     },
@@ -237,6 +265,10 @@ export const routeTree = rootRoute
     },
     "/id/dashboard": {
       "filePath": "id/dashboard.tsx",
+      "parent": "/id"
+    },
+    "/id/users": {
+      "filePath": "id/users.tsx",
       "parent": "/id"
     },
     "/id/": {
