@@ -20,15 +20,41 @@ Alternatively, you can use npm to install pnpm globally:
 
 ## 1. Clone a Git Repository
 To clone a repository from GitHub (or any Git server), use the following command:
-
-   ```bash
+```bash
    git clone <repository-url>
+   ```
 
 ## 2. Navigate to the Cloned Repository
+   ```bash
+   cd repo-name
+   ```
 ## 3. Create a New Branch
+   ```bash
+   git checkout -b <branch-name>
+   ```
+   For example:
+   ```bash
+   git checkout -b feature/new-feature
+   ```
 ## 4. Make Changes
+   Edit or create files in the repository as needed.
 ## 5. Stage the Changes
+   ```bash
+   git add <file-name>
+   ```
+   To add all changes:
+   ```bash
+   git add .
+   ```
 ## 6. Commit the Changes
+   ```bash
+   git commit -m "Initial commit on new branch"
+   ```
 ## 7. Push the New Branch to the Remote Repository
    ```bash
    git push origin <branch-name>
+   ```
+   For example:
+   ```bash
+   git push origin feature/new-feature
+   ```
