@@ -6,17 +6,15 @@
 1. **Install Node.js**:  
    Ensure you have Node.js installed. You can download it from [Node.js official website](https://nodejs.org/).
 
-2. **Install `pnpm` via Corepack**:  
-   If you’re using Node.js v16.13 or newer, Corepack is included by default. Enable and install `pnpm`:
-   ```bash
-
-Install pnpm using npm:
+2. **Install pnpm using npm:**
 Alternatively, you can use npm to install pnpm globally:
+   ```bash
+   npm install -g pnpm
 
-npm install -g pnpm
 
-Check if pnpm is installed:
-pnpm --version
+   Check if pnpm is installed:
+   ```bash
+   pnpm --version
 
 
 # How to Clone a Git Repository, Create a New Branch, Make the First Commit, and Push It
