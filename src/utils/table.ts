@@ -2,27 +2,24 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "./supabase";
 import { useAtom } from "jotai";
 
-interface BusinessesTable {}
+interface Businesses {
+  id: number;
+  name: string;
+  address: string;
+  phone_number: number;
+}
 
 export async function getBusinessesTable() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["businesses"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("Businesses") // Replace with your actual table name
-        .select("*");
-
+      const { data, error } = await supabase.from("Businesses").select("*");
+      console.log(data);
       if (error) {
-        console.log("Error fetching Data");
-        throw new Error(error.message);
+        console.log("Error steamed for gettingTable: ", error);
+        throw error;
       }
-      return data;
+      return { data };
     },
   });
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return { data, isLoading };
 }
