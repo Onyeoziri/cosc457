@@ -18,7 +18,12 @@ import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as IdIndexImport } from './routes/id/index'
 import { Route as IdUsersImport } from './routes/id/users'
+import { Route as IdSupplierImport } from './routes/id/supplier'
+import { Route as IdPurchaseOrderImport } from './routes/id/purchaseOrder'
+import { Route as IdOrderItemImport } from './routes/id/orderItem'
 import { Route as IdDashboardImport } from './routes/id/dashboard'
+import { Route as IdAssetsImport } from './routes/id/assets'
+import { Route as IdAssetMaintenanceImport } from './routes/id/assetMaintenance'
 import { Route as IdLayoutImport } from './routes/id/_layout'
 
 // Create Virtual Routes
@@ -63,9 +68,39 @@ const IdUsersRoute = IdUsersImport.update({
   getParentRoute: () => IdRoute,
 } as any)
 
+const IdSupplierRoute = IdSupplierImport.update({
+  id: '/supplier',
+  path: '/supplier',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdPurchaseOrderRoute = IdPurchaseOrderImport.update({
+  id: '/purchaseOrder',
+  path: '/purchaseOrder',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdOrderItemRoute = IdOrderItemImport.update({
+  id: '/orderItem',
+  path: '/orderItem',
+  getParentRoute: () => IdRoute,
+} as any)
+
 const IdDashboardRoute = IdDashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdAssetsRoute = IdAssetsImport.update({
+  id: '/assets',
+  path: '/assets',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdAssetMaintenanceRoute = IdAssetMaintenanceImport.update({
+  id: '/assetMaintenance',
+  path: '/assetMaintenance',
   getParentRoute: () => IdRoute,
 } as any)
 
@@ -113,11 +148,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdLayoutImport
       parentRoute: typeof IdRoute
     }
+    '/id/assetMaintenance': {
+      id: '/id/assetMaintenance'
+      path: '/assetMaintenance'
+      fullPath: '/id/assetMaintenance'
+      preLoaderRoute: typeof IdAssetMaintenanceImport
+      parentRoute: typeof IdImport
+    }
+    '/id/assets': {
+      id: '/id/assets'
+      path: '/assets'
+      fullPath: '/id/assets'
+      preLoaderRoute: typeof IdAssetsImport
+      parentRoute: typeof IdImport
+    }
     '/id/dashboard': {
       id: '/id/dashboard'
       path: '/dashboard'
       fullPath: '/id/dashboard'
       preLoaderRoute: typeof IdDashboardImport
+      parentRoute: typeof IdImport
+    }
+    '/id/orderItem': {
+      id: '/id/orderItem'
+      path: '/orderItem'
+      fullPath: '/id/orderItem'
+      preLoaderRoute: typeof IdOrderItemImport
+      parentRoute: typeof IdImport
+    }
+    '/id/purchaseOrder': {
+      id: '/id/purchaseOrder'
+      path: '/purchaseOrder'
+      fullPath: '/id/purchaseOrder'
+      preLoaderRoute: typeof IdPurchaseOrderImport
+      parentRoute: typeof IdImport
+    }
+    '/id/supplier': {
+      id: '/id/supplier'
+      path: '/supplier'
+      fullPath: '/id/supplier'
+      preLoaderRoute: typeof IdSupplierImport
       parentRoute: typeof IdImport
     }
     '/id/users': {
@@ -141,14 +211,24 @@ declare module '@tanstack/react-router' {
 
 interface IdRouteChildren {
   IdLayoutRoute: typeof IdLayoutRoute
+  IdAssetMaintenanceRoute: typeof IdAssetMaintenanceRoute
+  IdAssetsRoute: typeof IdAssetsRoute
   IdDashboardRoute: typeof IdDashboardRoute
+  IdOrderItemRoute: typeof IdOrderItemRoute
+  IdPurchaseOrderRoute: typeof IdPurchaseOrderRoute
+  IdSupplierRoute: typeof IdSupplierRoute
   IdUsersRoute: typeof IdUsersRoute
   IdIndexRoute: typeof IdIndexRoute
 }
 
 const IdRouteChildren: IdRouteChildren = {
   IdLayoutRoute: IdLayoutRoute,
+  IdAssetMaintenanceRoute: IdAssetMaintenanceRoute,
+  IdAssetsRoute: IdAssetsRoute,
   IdDashboardRoute: IdDashboardRoute,
+  IdOrderItemRoute: IdOrderItemRoute,
+  IdPurchaseOrderRoute: IdPurchaseOrderRoute,
+  IdSupplierRoute: IdSupplierRoute,
   IdUsersRoute: IdUsersRoute,
   IdIndexRoute: IdIndexRoute,
 }
@@ -160,7 +240,12 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/id': typeof IdLayoutRoute
+  '/id/assetMaintenance': typeof IdAssetMaintenanceRoute
+  '/id/assets': typeof IdAssetsRoute
   '/id/dashboard': typeof IdDashboardRoute
+  '/id/orderItem': typeof IdOrderItemRoute
+  '/id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/id/supplier': typeof IdSupplierRoute
   '/id/users': typeof IdUsersRoute
   '/id/': typeof IdIndexRoute
 }
@@ -170,7 +255,12 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/id': typeof IdIndexRoute
+  '/id/assetMaintenance': typeof IdAssetMaintenanceRoute
+  '/id/assets': typeof IdAssetsRoute
   '/id/dashboard': typeof IdDashboardRoute
+  '/id/orderItem': typeof IdOrderItemRoute
+  '/id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/id/supplier': typeof IdSupplierRoute
   '/id/users': typeof IdUsersRoute
 }
 
@@ -181,7 +271,12 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/id': typeof IdRouteWithChildren
   '/id/_layout': typeof IdLayoutRoute
+  '/id/assetMaintenance': typeof IdAssetMaintenanceRoute
+  '/id/assets': typeof IdAssetsRoute
   '/id/dashboard': typeof IdDashboardRoute
+  '/id/orderItem': typeof IdOrderItemRoute
+  '/id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/id/supplier': typeof IdSupplierRoute
   '/id/users': typeof IdUsersRoute
   '/id/': typeof IdIndexRoute
 }
@@ -193,11 +288,27 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/id'
+    | '/id/assetMaintenance'
+    | '/id/assets'
     | '/id/dashboard'
+    | '/id/orderItem'
+    | '/id/purchaseOrder'
+    | '/id/supplier'
     | '/id/users'
     | '/id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/login' | '/id' | '/id/dashboard' | '/id/users'
+  to:
+    | '/'
+    | '/about'
+    | '/login'
+    | '/id'
+    | '/id/assetMaintenance'
+    | '/id/assets'
+    | '/id/dashboard'
+    | '/id/orderItem'
+    | '/id/purchaseOrder'
+    | '/id/supplier'
+    | '/id/users'
   id:
     | '__root__'
     | '/'
@@ -205,7 +316,12 @@ export interface FileRouteTypes {
     | '/login'
     | '/id'
     | '/id/_layout'
+    | '/id/assetMaintenance'
+    | '/id/assets'
     | '/id/dashboard'
+    | '/id/orderItem'
+    | '/id/purchaseOrder'
+    | '/id/supplier'
     | '/id/users'
     | '/id/'
   fileRoutesById: FileRoutesById
@@ -254,7 +370,12 @@ export const routeTree = rootRoute
       "filePath": "id",
       "children": [
         "/id/_layout",
+        "/id/assetMaintenance",
+        "/id/assets",
         "/id/dashboard",
+        "/id/orderItem",
+        "/id/purchaseOrder",
+        "/id/supplier",
         "/id/users",
         "/id/"
       ]
@@ -263,8 +384,28 @@ export const routeTree = rootRoute
       "filePath": "id/_layout.tsx",
       "parent": "/id"
     },
+    "/id/assetMaintenance": {
+      "filePath": "id/assetMaintenance.tsx",
+      "parent": "/id"
+    },
+    "/id/assets": {
+      "filePath": "id/assets.tsx",
+      "parent": "/id"
+    },
     "/id/dashboard": {
       "filePath": "id/dashboard.tsx",
+      "parent": "/id"
+    },
+    "/id/orderItem": {
+      "filePath": "id/orderItem.tsx",
+      "parent": "/id"
+    },
+    "/id/purchaseOrder": {
+      "filePath": "id/purchaseOrder.tsx",
+      "parent": "/id"
+    },
+    "/id/supplier": {
+      "filePath": "id/supplier.tsx",
       "parent": "/id"
     },
     "/id/users": {
