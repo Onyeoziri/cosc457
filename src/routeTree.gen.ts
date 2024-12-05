@@ -15,11 +15,27 @@ import { Route as LoginImport } from './routes/login'
 import { Route as AboutImport } from './routes/about'
 import { Route as IdRouteImport } from './routes/$id/route'
 import { Route as IndexImport } from './routes/index'
+<<<<<<< HEAD
 import { Route as IdIndexImport } from './routes/$id/index'
 import { Route as IdUsersImport } from './routes/$id/users'
 import { Route as IdProductsImport } from './routes/$id/products'
 import { Route as IdOrdersImport } from './routes/$id/orders'
 import { Route as IdBusinessesImport } from './routes/$id/businesses'
+=======
+import { Route as IdIndexImport } from './routes/id/index'
+import { Route as IdUsersImport } from './routes/id/users'
+import { Route as IdSupplierImport } from './routes/id/supplier'
+import { Route as IdPurchaseOrderImport } from './routes/id/purchaseOrder'
+import { Route as IdOrderItemImport } from './routes/id/orderItem'
+import { Route as IdDashboardImport } from './routes/id/dashboard'
+import { Route as IdAssetsImport } from './routes/id/assets'
+import { Route as IdAssetMaintenanceImport } from './routes/id/assetMaintenance'
+import { Route as IdLayoutImport } from './routes/id/_layout'
+
+// Create Virtual Routes
+
+const IdImport = createFileRoute('/id')()
+>>>>>>> origin/table/new-table
 
 // Create/Update Routes
 
@@ -59,6 +75,7 @@ const IdUsersRoute = IdUsersImport.update({
   getParentRoute: () => IdRouteRoute,
 } as any)
 
+<<<<<<< HEAD
 const IdProductsRoute = IdProductsImport.update({
   id: '/products',
   path: '/products',
@@ -75,6 +92,47 @@ const IdBusinessesRoute = IdBusinessesImport.update({
   id: '/businesses',
   path: '/businesses',
   getParentRoute: () => IdRouteRoute,
+=======
+const IdSupplierRoute = IdSupplierImport.update({
+  id: '/supplier',
+  path: '/supplier',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdPurchaseOrderRoute = IdPurchaseOrderImport.update({
+  id: '/purchaseOrder',
+  path: '/purchaseOrder',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdOrderItemRoute = IdOrderItemImport.update({
+  id: '/orderItem',
+  path: '/orderItem',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdDashboardRoute = IdDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdAssetsRoute = IdAssetsImport.update({
+  id: '/assets',
+  path: '/assets',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdAssetMaintenanceRoute = IdAssetMaintenanceImport.update({
+  id: '/assetMaintenance',
+  path: '/assetMaintenance',
+  getParentRoute: () => IdRoute,
+} as any)
+
+const IdLayoutRoute = IdLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => IdRoute,
+>>>>>>> origin/table/new-table
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -123,6 +181,7 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdOrdersImport
       parentRoute: typeof IdRouteImport
     }
+<<<<<<< HEAD
     '/$id/products': {
       id: '/$id/products'
       path: '/products'
@@ -132,6 +191,52 @@ declare module '@tanstack/react-router' {
     }
     '/$id/users': {
       id: '/$id/users'
+=======
+    '/id/assetMaintenance': {
+      id: '/id/assetMaintenance'
+      path: '/assetMaintenance'
+      fullPath: '/id/assetMaintenance'
+      preLoaderRoute: typeof IdAssetMaintenanceImport
+      parentRoute: typeof IdImport
+    }
+    '/id/assets': {
+      id: '/id/assets'
+      path: '/assets'
+      fullPath: '/id/assets'
+      preLoaderRoute: typeof IdAssetsImport
+      parentRoute: typeof IdImport
+    }
+    '/id/dashboard': {
+      id: '/id/dashboard'
+      path: '/dashboard'
+      fullPath: '/id/dashboard'
+      preLoaderRoute: typeof IdDashboardImport
+      parentRoute: typeof IdImport
+    }
+    '/id/orderItem': {
+      id: '/id/orderItem'
+      path: '/orderItem'
+      fullPath: '/id/orderItem'
+      preLoaderRoute: typeof IdOrderItemImport
+      parentRoute: typeof IdImport
+    }
+    '/id/purchaseOrder': {
+      id: '/id/purchaseOrder'
+      path: '/purchaseOrder'
+      fullPath: '/id/purchaseOrder'
+      preLoaderRoute: typeof IdPurchaseOrderImport
+      parentRoute: typeof IdImport
+    }
+    '/id/supplier': {
+      id: '/id/supplier'
+      path: '/supplier'
+      fullPath: '/id/supplier'
+      preLoaderRoute: typeof IdSupplierImport
+      parentRoute: typeof IdImport
+    }
+    '/id/users': {
+      id: '/id/users'
+>>>>>>> origin/table/new-table
       path: '/users'
       fullPath: '/$id/users'
       preLoaderRoute: typeof IdUsersImport
@@ -149,18 +254,40 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+<<<<<<< HEAD
 interface IdRouteRouteChildren {
   IdBusinessesRoute: typeof IdBusinessesRoute
   IdOrdersRoute: typeof IdOrdersRoute
   IdProductsRoute: typeof IdProductsRoute
+=======
+interface IdRouteChildren {
+  IdLayoutRoute: typeof IdLayoutRoute
+  IdAssetMaintenanceRoute: typeof IdAssetMaintenanceRoute
+  IdAssetsRoute: typeof IdAssetsRoute
+  IdDashboardRoute: typeof IdDashboardRoute
+  IdOrderItemRoute: typeof IdOrderItemRoute
+  IdPurchaseOrderRoute: typeof IdPurchaseOrderRoute
+  IdSupplierRoute: typeof IdSupplierRoute
+>>>>>>> origin/table/new-table
   IdUsersRoute: typeof IdUsersRoute
   IdIndexRoute: typeof IdIndexRoute
 }
 
+<<<<<<< HEAD
 const IdRouteRouteChildren: IdRouteRouteChildren = {
   IdBusinessesRoute: IdBusinessesRoute,
   IdOrdersRoute: IdOrdersRoute,
   IdProductsRoute: IdProductsRoute,
+=======
+const IdRouteChildren: IdRouteChildren = {
+  IdLayoutRoute: IdLayoutRoute,
+  IdAssetMaintenanceRoute: IdAssetMaintenanceRoute,
+  IdAssetsRoute: IdAssetsRoute,
+  IdDashboardRoute: IdDashboardRoute,
+  IdOrderItemRoute: IdOrderItemRoute,
+  IdPurchaseOrderRoute: IdPurchaseOrderRoute,
+  IdSupplierRoute: IdSupplierRoute,
+>>>>>>> origin/table/new-table
   IdUsersRoute: IdUsersRoute,
   IdIndexRoute: IdIndexRoute,
 }
@@ -173,22 +300,45 @@ export interface FileRoutesByFullPath {
   '/$id': typeof IdRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+<<<<<<< HEAD
   '/$id/businesses': typeof IdBusinessesRoute
   '/$id/orders': typeof IdOrdersRoute
   '/$id/products': typeof IdProductsRoute
   '/$id/users': typeof IdUsersRoute
   '/$id/': typeof IdIndexRoute
+=======
+  '/id': typeof IdLayoutRoute
+  '/id/assetMaintenance': typeof IdAssetMaintenanceRoute
+  '/id/assets': typeof IdAssetsRoute
+  '/id/dashboard': typeof IdDashboardRoute
+  '/id/orderItem': typeof IdOrderItemRoute
+  '/id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/id/supplier': typeof IdSupplierRoute
+  '/id/users': typeof IdUsersRoute
+  '/id/': typeof IdIndexRoute
+>>>>>>> origin/table/new-table
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+<<<<<<< HEAD
   '/$id/businesses': typeof IdBusinessesRoute
   '/$id/orders': typeof IdOrdersRoute
   '/$id/products': typeof IdProductsRoute
   '/$id/users': typeof IdUsersRoute
   '/$id': typeof IdIndexRoute
+=======
+  '/id': typeof IdIndexRoute
+  '/id/assetMaintenance': typeof IdAssetMaintenanceRoute
+  '/id/assets': typeof IdAssetsRoute
+  '/id/dashboard': typeof IdDashboardRoute
+  '/id/orderItem': typeof IdOrderItemRoute
+  '/id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/id/supplier': typeof IdSupplierRoute
+  '/id/users': typeof IdUsersRoute
+>>>>>>> origin/table/new-table
 }
 
 export interface FileRoutesById {
@@ -197,11 +347,24 @@ export interface FileRoutesById {
   '/$id': typeof IdRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+<<<<<<< HEAD
   '/$id/businesses': typeof IdBusinessesRoute
   '/$id/orders': typeof IdOrdersRoute
   '/$id/products': typeof IdProductsRoute
   '/$id/users': typeof IdUsersRoute
   '/$id/': typeof IdIndexRoute
+=======
+  '/id': typeof IdRouteWithChildren
+  '/id/_layout': typeof IdLayoutRoute
+  '/id/assetMaintenance': typeof IdAssetMaintenanceRoute
+  '/id/assets': typeof IdAssetsRoute
+  '/id/dashboard': typeof IdDashboardRoute
+  '/id/orderItem': typeof IdOrderItemRoute
+  '/id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/id/supplier': typeof IdSupplierRoute
+  '/id/users': typeof IdUsersRoute
+  '/id/': typeof IdIndexRoute
+>>>>>>> origin/table/new-table
 }
 
 export interface FileRouteTypes {
@@ -211,6 +374,7 @@ export interface FileRouteTypes {
     | '/$id'
     | '/about'
     | '/login'
+<<<<<<< HEAD
     | '/$id/businesses'
     | '/$id/orders'
     | '/$id/products'
@@ -237,6 +401,45 @@ export interface FileRouteTypes {
     | '/$id/products'
     | '/$id/users'
     | '/$id/'
+=======
+    | '/id'
+    | '/id/assetMaintenance'
+    | '/id/assets'
+    | '/id/dashboard'
+    | '/id/orderItem'
+    | '/id/purchaseOrder'
+    | '/id/supplier'
+    | '/id/users'
+    | '/id/'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/about'
+    | '/login'
+    | '/id'
+    | '/id/assetMaintenance'
+    | '/id/assets'
+    | '/id/dashboard'
+    | '/id/orderItem'
+    | '/id/purchaseOrder'
+    | '/id/supplier'
+    | '/id/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/login'
+    | '/id'
+    | '/id/_layout'
+    | '/id/assetMaintenance'
+    | '/id/assets'
+    | '/id/dashboard'
+    | '/id/orderItem'
+    | '/id/purchaseOrder'
+    | '/id/supplier'
+    | '/id/users'
+    | '/id/'
+>>>>>>> origin/table/new-table
   fileRoutesById: FileRoutesById
 }
 
@@ -289,14 +492,31 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.tsx"
     },
+<<<<<<< HEAD
     "/$id/businesses": {
       "filePath": "$id/businesses.tsx",
       "parent": "/$id"
+=======
+    "/id": {
+      "filePath": "id",
+      "children": [
+        "/id/_layout",
+        "/id/assetMaintenance",
+        "/id/assets",
+        "/id/dashboard",
+        "/id/orderItem",
+        "/id/purchaseOrder",
+        "/id/supplier",
+        "/id/users",
+        "/id/"
+      ]
+>>>>>>> origin/table/new-table
     },
     "/$id/orders": {
       "filePath": "$id/orders.tsx",
       "parent": "/$id"
     },
+<<<<<<< HEAD
     "/$id/products": {
       "filePath": "$id/products.tsx",
       "parent": "/$id"
@@ -304,6 +524,35 @@ export const routeTree = rootRoute
     "/$id/users": {
       "filePath": "$id/users.tsx",
       "parent": "/$id"
+=======
+    "/id/assetMaintenance": {
+      "filePath": "id/assetMaintenance.tsx",
+      "parent": "/id"
+    },
+    "/id/assets": {
+      "filePath": "id/assets.tsx",
+      "parent": "/id"
+    },
+    "/id/dashboard": {
+      "filePath": "id/dashboard.tsx",
+      "parent": "/id"
+    },
+    "/id/orderItem": {
+      "filePath": "id/orderItem.tsx",
+      "parent": "/id"
+    },
+    "/id/purchaseOrder": {
+      "filePath": "id/purchaseOrder.tsx",
+      "parent": "/id"
+    },
+    "/id/supplier": {
+      "filePath": "id/supplier.tsx",
+      "parent": "/id"
+    },
+    "/id/users": {
+      "filePath": "id/users.tsx",
+      "parent": "/id"
+>>>>>>> origin/table/new-table
     },
     "/$id/": {
       "filePath": "$id/index.tsx",
