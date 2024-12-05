@@ -1,10 +1,43 @@
-import { Link } from "@tanstack/react-router";
-import React from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "../ui/button";
+import { useAtom } from "jotai";
+import { accountsAtom, isAuthenticatedAtom, logoutAtom } from "@/store/auth";
 
 export default function NavBar() {
+  const [isAuthenticated] = useAtom(isAuthenticatedAtom);
+  const [, logout] = useAtom(logoutAtom);
+  const navigate = useNavigate();
+
+  const LoginButton = () => {
+    if (!isAuthenticated) {
+      return (
+        <Button
+          onClick={() =>
+            navigate({
+              to: "/login",
+            })
+          }
+        >
+          Login
+        </Button>
+      );
+    }
+    return (
+      <Button
+        onClick={() => {
+          logout();
+          navigate({
+            to: "/",
+          });
+        }}
+      >
+        Sign Out
+      </Button>
+    );
+  };
+
   return (
-    <nav className="flex justify-between items-center my-8 gap-12">
+    <nav className="flex justify-between items-center my-8 gap-12 mx-11 ">
       <Link to="/" className="text-lg font-bold">
         Home
       </Link>
@@ -16,12 +49,7 @@ export default function NavBar() {
           </Link>
         </li>
         <li>
-          <Link
-            to="/login"
-            className=" rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2 "
-          >
-            Login
-          </Link>
+          <LoginButton />
         </li>
       </ul>
     </nav>

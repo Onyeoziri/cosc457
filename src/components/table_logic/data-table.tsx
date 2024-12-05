@@ -103,7 +103,7 @@ export function DataTable<TData extends object>({ type, data }: DataTableProps<T
 
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="text-black">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {

@@ -26,35 +26,9 @@ interface DataTableProps<TData, TValue> {
 }
 
 function HomeComponent() {
-  const businessType = {
-    id: "",
-    name: "",
-    address: "",
-    phone_number: 0,
-  };
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["businesses"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("Businesses").select("*");
-      console.log("Data:", data);
-      if (error) throw error;
-
-      return data;
-    },
-  });
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {(error as Error).message}</p>;
-
   return (
     <div className="p-2">
       <h2>Using this to test database connection & tables</h2>
-      <DataTable type={businessType} data={data || []} />
-      <p>{JSON.stringify(data, null, 2)}</p>
-
-      <hr />
-      <SideBar />
     </div>
   );
 }

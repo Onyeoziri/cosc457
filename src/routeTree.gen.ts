@@ -8,30 +8,20 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AboutImport } from './routes/about'
+import { Route as IdRouteImport } from './routes/$id/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as IdIndexImport } from './routes/id/index'
-import { Route as IdUsersImport } from './routes/id/users'
-import { Route as IdDashboardImport } from './routes/id/dashboard'
-import { Route as IdLayoutImport } from './routes/id/_layout'
-
-// Create Virtual Routes
-
-const IdImport = createFileRoute('/id')()
+import { Route as IdIndexImport } from './routes/$id/index'
+import { Route as IdUsersImport } from './routes/$id/users'
+import { Route as IdProductsImport } from './routes/$id/products'
+import { Route as IdOrdersImport } from './routes/$id/orders'
+import { Route as IdBusinessesImport } from './routes/$id/businesses'
 
 // Create/Update Routes
-
-const IdRoute = IdImport.update({
-  id: '/id',
-  path: '/id',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   id: '/login',
@@ -45,6 +35,12 @@ const AboutRoute = AboutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const IdRouteRoute = IdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
@@ -54,24 +50,31 @@ const IndexRoute = IndexImport.update({
 const IdIndexRoute = IdIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => IdRoute,
+  getParentRoute: () => IdRouteRoute,
 } as any)
 
 const IdUsersRoute = IdUsersImport.update({
   id: '/users',
   path: '/users',
-  getParentRoute: () => IdRoute,
+  getParentRoute: () => IdRouteRoute,
 } as any)
 
-const IdDashboardRoute = IdDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => IdRoute,
+const IdProductsRoute = IdProductsImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => IdRouteRoute,
 } as any)
 
-const IdLayoutRoute = IdLayoutImport.update({
-  id: '/_layout',
-  getParentRoute: () => IdRoute,
+const IdOrdersRoute = IdOrdersImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdBusinessesRoute = IdBusinessesImport.update({
+  id: '/businesses',
+  path: '/businesses',
+  getParentRoute: () => IdRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -83,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/$id': {
+      id: '/$id'
+      path: '/$id'
+      fullPath: '/$id'
+      preLoaderRoute: typeof IdRouteImport
       parentRoute: typeof rootRoute
     }
     '/about': {
@@ -99,130 +109,149 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/id': {
-      id: '/id'
-      path: '/id'
-      fullPath: '/id'
-      preLoaderRoute: typeof IdImport
-      parentRoute: typeof rootRoute
+    '/$id/businesses': {
+      id: '/$id/businesses'
+      path: '/businesses'
+      fullPath: '/$id/businesses'
+      preLoaderRoute: typeof IdBusinessesImport
+      parentRoute: typeof IdRouteImport
     }
-    '/id/_layout': {
-      id: '/id/_layout'
-      path: '/id'
-      fullPath: '/id'
-      preLoaderRoute: typeof IdLayoutImport
-      parentRoute: typeof IdRoute
+    '/$id/orders': {
+      id: '/$id/orders'
+      path: '/orders'
+      fullPath: '/$id/orders'
+      preLoaderRoute: typeof IdOrdersImport
+      parentRoute: typeof IdRouteImport
     }
-    '/id/dashboard': {
-      id: '/id/dashboard'
-      path: '/dashboard'
-      fullPath: '/id/dashboard'
-      preLoaderRoute: typeof IdDashboardImport
-      parentRoute: typeof IdImport
+    '/$id/products': {
+      id: '/$id/products'
+      path: '/products'
+      fullPath: '/$id/products'
+      preLoaderRoute: typeof IdProductsImport
+      parentRoute: typeof IdRouteImport
     }
-    '/id/users': {
-      id: '/id/users'
+    '/$id/users': {
+      id: '/$id/users'
       path: '/users'
-      fullPath: '/id/users'
+      fullPath: '/$id/users'
       preLoaderRoute: typeof IdUsersImport
-      parentRoute: typeof IdImport
+      parentRoute: typeof IdRouteImport
     }
-    '/id/': {
-      id: '/id/'
+    '/$id/': {
+      id: '/$id/'
       path: '/'
-      fullPath: '/id/'
+      fullPath: '/$id/'
       preLoaderRoute: typeof IdIndexImport
-      parentRoute: typeof IdImport
+      parentRoute: typeof IdRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface IdRouteChildren {
-  IdLayoutRoute: typeof IdLayoutRoute
-  IdDashboardRoute: typeof IdDashboardRoute
+interface IdRouteRouteChildren {
+  IdBusinessesRoute: typeof IdBusinessesRoute
+  IdOrdersRoute: typeof IdOrdersRoute
+  IdProductsRoute: typeof IdProductsRoute
   IdUsersRoute: typeof IdUsersRoute
   IdIndexRoute: typeof IdIndexRoute
 }
 
-const IdRouteChildren: IdRouteChildren = {
-  IdLayoutRoute: IdLayoutRoute,
-  IdDashboardRoute: IdDashboardRoute,
+const IdRouteRouteChildren: IdRouteRouteChildren = {
+  IdBusinessesRoute: IdBusinessesRoute,
+  IdOrdersRoute: IdOrdersRoute,
+  IdProductsRoute: IdProductsRoute,
   IdUsersRoute: IdUsersRoute,
   IdIndexRoute: IdIndexRoute,
 }
 
-const IdRouteWithChildren = IdRoute._addFileChildren(IdRouteChildren)
+const IdRouteRouteWithChildren =
+  IdRouteRoute._addFileChildren(IdRouteRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$id': typeof IdRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/id': typeof IdLayoutRoute
-  '/id/dashboard': typeof IdDashboardRoute
-  '/id/users': typeof IdUsersRoute
-  '/id/': typeof IdIndexRoute
+  '/$id/businesses': typeof IdBusinessesRoute
+  '/$id/orders': typeof IdOrdersRoute
+  '/$id/products': typeof IdProductsRoute
+  '/$id/users': typeof IdUsersRoute
+  '/$id/': typeof IdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/id': typeof IdIndexRoute
-  '/id/dashboard': typeof IdDashboardRoute
-  '/id/users': typeof IdUsersRoute
+  '/$id/businesses': typeof IdBusinessesRoute
+  '/$id/orders': typeof IdOrdersRoute
+  '/$id/products': typeof IdProductsRoute
+  '/$id/users': typeof IdUsersRoute
+  '/$id': typeof IdIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/$id': typeof IdRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/id': typeof IdRouteWithChildren
-  '/id/_layout': typeof IdLayoutRoute
-  '/id/dashboard': typeof IdDashboardRoute
-  '/id/users': typeof IdUsersRoute
-  '/id/': typeof IdIndexRoute
+  '/$id/businesses': typeof IdBusinessesRoute
+  '/$id/orders': typeof IdOrdersRoute
+  '/$id/products': typeof IdProductsRoute
+  '/$id/users': typeof IdUsersRoute
+  '/$id/': typeof IdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$id'
     | '/about'
     | '/login'
-    | '/id'
-    | '/id/dashboard'
-    | '/id/users'
-    | '/id/'
+    | '/$id/businesses'
+    | '/$id/orders'
+    | '/$id/products'
+    | '/$id/users'
+    | '/$id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/login' | '/id' | '/id/dashboard' | '/id/users'
-  id:
-    | '__root__'
+  to:
     | '/'
     | '/about'
     | '/login'
-    | '/id'
-    | '/id/_layout'
-    | '/id/dashboard'
-    | '/id/users'
-    | '/id/'
+    | '/$id/businesses'
+    | '/$id/orders'
+    | '/$id/products'
+    | '/$id/users'
+    | '/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/$id'
+    | '/about'
+    | '/login'
+    | '/$id/businesses'
+    | '/$id/orders'
+    | '/$id/products'
+    | '/$id/users'
+    | '/$id/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  IdRouteRoute: typeof IdRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRoute
-  IdRoute: typeof IdRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  IdRouteRoute: IdRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
-  IdRoute: IdRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -236,13 +265,23 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/$id",
         "/about",
-        "/login",
-        "/id"
+        "/login"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/$id": {
+      "filePath": "$id/route.tsx",
+      "children": [
+        "/$id/businesses",
+        "/$id/orders",
+        "/$id/products",
+        "/$id/users",
+        "/$id/"
+      ]
     },
     "/about": {
       "filePath": "about.tsx"
@@ -250,30 +289,25 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.tsx"
     },
-    "/id": {
-      "filePath": "id",
-      "children": [
-        "/id/_layout",
-        "/id/dashboard",
-        "/id/users",
-        "/id/"
-      ]
+    "/$id/businesses": {
+      "filePath": "$id/businesses.tsx",
+      "parent": "/$id"
     },
-    "/id/_layout": {
-      "filePath": "id/_layout.tsx",
-      "parent": "/id"
+    "/$id/orders": {
+      "filePath": "$id/orders.tsx",
+      "parent": "/$id"
     },
-    "/id/dashboard": {
-      "filePath": "id/dashboard.tsx",
-      "parent": "/id"
+    "/$id/products": {
+      "filePath": "$id/products.tsx",
+      "parent": "/$id"
     },
-    "/id/users": {
-      "filePath": "id/users.tsx",
-      "parent": "/id"
+    "/$id/users": {
+      "filePath": "$id/users.tsx",
+      "parent": "/$id"
     },
-    "/id/": {
-      "filePath": "id/index.tsx",
-      "parent": "/id"
+    "/$id/": {
+      "filePath": "$id/index.tsx",
+      "parent": "/$id"
     }
   }
 }

@@ -3,18 +3,20 @@ import { supabase } from "@/utils/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/id/users")({
+export const Route = createFileRoute("/$id/users")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const { id } = Route.useParams();
+
   const accountType = {
     id: "",
     email: "",
     password: "",
-    account_type: "",
-    business_affiliated: "",
-    company_role: "",
+    accountType: "",
+    businessAffiliated: 0,
+    companyRole: "",
   };
 
   const { data, isLoading, error } = useQuery({
@@ -32,7 +34,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <h1>Hello "/id/users"!</h1>
+      <h1 className="text-center text-4xl mb-6">Users</h1>
       <DataTable type={accountType} data={data || []} />
     </div>
   );

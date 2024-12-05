@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,21 +7,53 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { EyeOffIcon, EyeIcon } from "lucide-react";
+import { useAtom } from "jotai";
+import { loginAtom, loadingAtom, errorAtom } from "@/store/auth";
 
 export const Route = createFileRoute("/login")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+  const [, login] = useAtom(loginAtom);
+  const [loading] = useAtom(loadingAtom);
+  const [error] = useAtom(errorAtom);
+
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Attempting login..."); // Debug log
+
+    try {
+      const user = await login(credentials);
+      console.log("Login response:", user); // See exactly what we're getting back
+
+      console.log("Login successful:", user);
+
+      navigate({
+        to: "/$id",
+        params: { id: user.id.toString() }, // Convert id to string
+        replace: true,
+      });
+    } catch (err) {
+      console.error("Login error:", err);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="min-h-max flex items-center justify-center text px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md space-y-8 bg-white shadow-xl rounded-xl">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-extrabold text-slate-900">Sign In</CardTitle>
@@ -30,7 +62,7 @@ function RouteComponent() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="Get">
             <div>
               <Label htmlFor="email" className="block text-sm font-medium text-slate-700">
                 Email address
@@ -47,6 +79,8 @@ function RouteComponent() {
                 invalid:border-pink-500 invalid:text-pink-600
                 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                 placeholder="you@example.com"
+                value={credentials.email}
+                onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
               />
             </div>
 
@@ -65,6 +99,10 @@ function RouteComponent() {
                   focus:outline-none focus:border-slate-500 focus:ring-1 focus:ring-slate-500
                   disabled:bg-slate-100 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                   placeholder="••••••••"
+                  value={credentials.password}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, password: e.target.value })
+                  }
                 />
                 <button
                   type="button"
@@ -92,7 +130,7 @@ function RouteComponent() {
         </CardContent>
         <CardFooter className="text-center">
           <a
-            href="#"
+            href="/id"
             className="font-medium text-slate-600 hover:text-slate-500 transition-colors duration-200"
           >
             Forgot your password?
