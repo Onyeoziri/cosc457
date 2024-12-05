@@ -8,6 +8,10 @@ import {
   Settings,
   LogOut,
   Building2,
+  HandCoins,
+  Construction,
+  Handshake,
+  TableProperties,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -34,11 +38,18 @@ import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 
 const sidebarItems = [
-  { name: "Dashboard", icon: LayoutDashboard, href: "/id" },
-  { name: "Businesses", icon: Building2, href: "/id/businesses" },
-  { name: "Users", icon: Users, href: "/id/users" },
-  { name: "Products", icon: ShoppingCart, href: "/id/products" },
-  { name: "Orders", icon: FileText, href: "/id/orders" },
+  { name: "Dashboard", icon: LayoutDashboard, href: "/$id" },
+  { name: "Businesses", icon: Building2, href: "/$id/businesses" },
+  { name: "Users", icon: Users, href: "/$id/users" },
+  { name: "Products", icon: ShoppingCart, href: "/$id/products" },
+  { name: "Asset Maintence", icon: Construction, href: "/$id/assetMaintenance" },
+  { name: "Supplier", icon: Handshake, href: "/$id/assets" },
+  { name: "Assets", icon: HandCoins, href: "/$id/orders" },
+  { name: "Purchase Order", icon: TableProperties, href: "/$id/purchaseOrder" },
+  { name: "_", icon: FileText, href: "/$id/orders" },
+  { name: "_", icon: FileText, href: "/$id/orders" },
+  { name: "_", icon: FileText, href: "/$id/orders" },
+  { name: "_", icon: FileText, href: "/$id/orders" },
 ];
 
 export default function SideBar() {

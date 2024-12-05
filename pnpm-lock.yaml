@@ -84,6 +84,9 @@ importers:
       '@tanstack/router-plugin':
         specifier: ^1.85.3
         version: 1.85.3(vite@5.4.11(@types/node@22.10.1))
+      '@tanstack/router-vite-plugin':
+        specifier: ^1.85.3
+        version: 1.85.3(vite@5.4.11(@types/node@22.10.1))
       '@types/node':
         specifier: ^22.10.1
         version: 22.10.1
@@ -1131,6 +1134,10 @@ packages:
         optional: true
       webpack:
         optional: true
+
+  '@tanstack/router-vite-plugin@1.85.3':
+    resolution: {integrity: sha512-61oadC00KhKtZIU+2vM9aPsC8dmPVPhJ5R01P3kqfYEMum/uZW52Ac+FQPThst3LkqjXuW/+bWPdc1HE1iZUjw==}
+    engines: {node: '>=12'}
 
   '@tanstack/store@0.6.0':
     resolution: {integrity: sha512-+m2OBglsjXcLmmKOX6/9v8BDOCtyxhMmZLsRUDswOOSdIIR9mvv6i0XNKsmTh3AlYU8c1mRcodC8/Vyf+69VlQ==}
@@ -3037,6 +3044,15 @@ snapshots:
       vite: 5.4.11(@types/node@22.10.1)
     transitivePeerDependencies:
       - supports-color
+
+  '@tanstack/router-vite-plugin@1.85.3(vite@5.4.11(@types/node@22.10.1))':
+    dependencies:
+      '@tanstack/router-plugin': 1.85.3(vite@5.4.11(@types/node@22.10.1))
+    transitivePeerDependencies:
+      - '@rsbuild/core'
+      - supports-color
+      - vite
+      - webpack
 
   '@tanstack/store@0.6.0': {}
 
