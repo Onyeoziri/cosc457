@@ -3,22 +3,23 @@ import { supabase } from "@/utils/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/$id/products")({
+export const Route = createFileRoute("/$id/inventory")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const orderItemType = {
+  const inventoryType = {
     id: "",
-    purchaseOrderId: "",
-    ingredientId: "",
-    quantity: 0,
+    restaurantId: "",
+    name: "",
+    LastChecked: 0,
+    Quantity: "",
   };
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["orderItems"],
+    queryKey: ["inventory"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("OrderItem").select("*");
+      const { data, error } = await supabase.from("Inventory").select("*");
       if (error) throw error;
 
       return data;
@@ -30,8 +31,8 @@ function RouteComponent() {
 
   return (
     <div>
-      <h1 className="text-center text-4xl mb-6">Ordered Items</h1>
-      <DataTable type={orderItemType} data={data || []} />
+      <h1 className="text-center text-4xl mb-6">Inventory</h1>
+      <DataTable type={inventoryType} data={data || []} />
     </div>
   );
 }

@@ -12,6 +12,10 @@ import {
   Construction,
   Handshake,
   TableProperties,
+  UtensilsCrossed,
+  CookingPot,
+  Kanban,
+  Banana,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -40,16 +44,26 @@ import { Link, useNavigate } from "@tanstack/react-router";
 const sidebarItems = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/$id" },
   { name: "Businesses", icon: Building2, href: "/$id/businesses" },
+  { name: "Restaurant", icon: UtensilsCrossed, href: "/$id/restaurant" },
+  { name: "Ingredient", icon: Banana, href: "/$id/ingredient" },
+  { name: "Inventory", icon: Kanban, href: "/$id/inventory" },
+  { name: "Recipe", icon: CookingPot, href: "/$id/recipe" },
   { name: "Users", icon: Users, href: "/$id/users" },
   { name: "Products", icon: ShoppingCart, href: "/$id/products" },
   { name: "Asset Maintence", icon: Construction, href: "/$id/assetMaintenance" },
-  { name: "Supplier", icon: Handshake, href: "/$id/assets" },
-  { name: "Assets", icon: HandCoins, href: "/$id/orders" },
+  { name: "Supplier", icon: Handshake, href: "/$id/suppier" },
+  { name: "Assets", icon: HandCoins, href: "/$id/assets" },
   { name: "Purchase Order", icon: TableProperties, href: "/$id/purchaseOrder" },
-  { name: "_", icon: FileText, href: "/$id/orders" },
-  { name: "_", icon: FileText, href: "/$id/orders" },
-  { name: "_", icon: FileText, href: "/$id/orders" },
-  { name: "_", icon: FileText, href: "/$id/orders" },
+  { name: "Line Item", icon: TableProperties, href: "/$id/lineItem" },
+  { name: "Order Item", icon: TableProperties, href: "/$id/orderitem" },
+  { name: "Owner", icon: TableProperties, href: "/$id/own" },
+  { name: "RecipeIngredint", icon: TableProperties, href: "/$id/recipeIngredint" },
+  { name: "SalesTransactions", icon: TableProperties, href: "/$id/salesTransaction" },
+  { name: "Stock Location", icon: TableProperties, href: "/$id/stockLocation" },
+  { name: "Storage Area", icon: TableProperties, href: "/$id/storageArea" },
+  { name: "Time Sheet", icon: TableProperties, href: "/$id/timeSheet" },
+  { name: "Transfer Record", icon: TableProperties, href: "/$id/transferRecord" },
+  { name: "Waste Record", icon: TableProperties, href: "/$id/wasteRecord" },
 ];
 
 export default function SideBar() {
