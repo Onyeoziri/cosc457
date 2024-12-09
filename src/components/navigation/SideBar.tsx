@@ -16,6 +16,16 @@ import {
   CookingPot,
   Kanban,
   Banana,
+  FileClock,
+  History,
+  BadgeDollarSign,
+  Biohazard,
+  Crown,
+  ListOrdered,
+  MapPinHouse,
+  NotepadTextDashed,
+  PackageOpen,
+  Rotate3d,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -54,16 +64,16 @@ const sidebarItems = [
   { name: "Supplier", icon: Handshake, href: "/$id/suppier" },
   { name: "Assets", icon: HandCoins, href: "/$id/assets" },
   { name: "Purchase Order", icon: TableProperties, href: "/$id/purchaseOrder" },
-  { name: "Line Item", icon: TableProperties, href: "/$id/lineItem" },
-  { name: "Order Item", icon: TableProperties, href: "/$id/orderitem" },
-  { name: "Owner", icon: TableProperties, href: "/$id/own" },
-  { name: "RecipeIngredint", icon: TableProperties, href: "/$id/recipeIngredint" },
-  { name: "SalesTransactions", icon: TableProperties, href: "/$id/salesTransaction" },
-  { name: "Stock Location", icon: TableProperties, href: "/$id/stockLocation" },
-  { name: "Storage Area", icon: TableProperties, href: "/$id/storageArea" },
-  { name: "Time Sheet", icon: TableProperties, href: "/$id/timeSheet" },
-  { name: "Transfer Record", icon: TableProperties, href: "/$id/transferRecord" },
-  { name: "Waste Record", icon: TableProperties, href: "/$id/wasteRecord" },
+  { name: "Line Item", icon: NotepadTextDashed, href: "/$id/lineItem" },
+  { name: "Orders", icon: ListOrdered, href: "/$id/orders" },
+  { name: "Owner", icon: Crown, href: "/$id/owner" },
+  { name: "Recipe Ingredint", icon: CookingPot, href: "/$id/recipeIngredint" },
+  { name: "Sales Transactions", icon: BadgeDollarSign, href: "/$id/salesTransaction" },
+  { name: "Stock Location", icon: MapPinHouse, href: "/$id/stockLocation" },
+  { name: "Storage Area", icon: PackageOpen, href: "/$id/storageArea" },
+  { name: "Time Sheet", icon: History, href: "/$id/timeSheet" },
+  { name: "Transfer Record", icon: Rotate3d, href: "/$id/transferRecord" },
+  { name: "Waste Record", icon: Biohazard, href: "/$id/wasteRecord" },
 ];
 
 export default function SideBar() {

@@ -16,11 +16,24 @@ import { Route as AboutImport } from './routes/about'
 import { Route as IdRouteImport } from './routes/$id/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as IdIndexImport } from './routes/$id/index'
+import { Route as IdWasteRecordImport } from './routes/$id/wasteRecord'
 import { Route as IdUsersImport } from './routes/$id/users'
+import { Route as IdTransferRecordImport } from './routes/$id/transferRecord'
+import { Route as IdTimeSheetImport } from './routes/$id/timeSheet'
 import { Route as IdSupplierImport } from './routes/$id/supplier'
+import { Route as IdStorageAreaImport } from './routes/$id/storageArea'
+import { Route as IdStockLocationImport } from './routes/$id/stockLocation'
+import { Route as IdSalesTransactionImport } from './routes/$id/salesTransaction'
+import { Route as IdRestaurantImport } from './routes/$id/restaurant'
+import { Route as IdRecipeIngredintImport } from './routes/$id/recipeIngredint'
+import { Route as IdRecipeImport } from './routes/$id/recipe'
 import { Route as IdPurchaseOrderImport } from './routes/$id/purchaseOrder'
 import { Route as IdProductsImport } from './routes/$id/products'
+import { Route as IdOwnerImport } from './routes/$id/owner'
 import { Route as IdOrdersImport } from './routes/$id/orders'
+import { Route as IdLineItemImport } from './routes/$id/lineItem'
+import { Route as IdInventoryImport } from './routes/$id/inventory'
+import { Route as IdIngredientImport } from './routes/$id/ingredient'
 import { Route as IdBusinessesImport } from './routes/$id/businesses'
 import { Route as IdAssetsImport } from './routes/$id/assets'
 import { Route as IdAssetMaintenanceImport } from './routes/$id/assetMaintenance'
@@ -57,15 +70,69 @@ const IdIndexRoute = IdIndexImport.update({
   getParentRoute: () => IdRouteRoute,
 } as any)
 
+const IdWasteRecordRoute = IdWasteRecordImport.update({
+  id: '/wasteRecord',
+  path: '/wasteRecord',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
 const IdUsersRoute = IdUsersImport.update({
   id: '/users',
   path: '/users',
   getParentRoute: () => IdRouteRoute,
 } as any)
 
+const IdTransferRecordRoute = IdTransferRecordImport.update({
+  id: '/transferRecord',
+  path: '/transferRecord',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdTimeSheetRoute = IdTimeSheetImport.update({
+  id: '/timeSheet',
+  path: '/timeSheet',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
 const IdSupplierRoute = IdSupplierImport.update({
   id: '/supplier',
   path: '/supplier',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdStorageAreaRoute = IdStorageAreaImport.update({
+  id: '/storageArea',
+  path: '/storageArea',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdStockLocationRoute = IdStockLocationImport.update({
+  id: '/stockLocation',
+  path: '/stockLocation',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdSalesTransactionRoute = IdSalesTransactionImport.update({
+  id: '/salesTransaction',
+  path: '/salesTransaction',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdRestaurantRoute = IdRestaurantImport.update({
+  id: '/restaurant',
+  path: '/restaurant',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdRecipeIngredintRoute = IdRecipeIngredintImport.update({
+  id: '/recipeIngredint',
+  path: '/recipeIngredint',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdRecipeRoute = IdRecipeImport.update({
+  id: '/recipe',
+  path: '/recipe',
   getParentRoute: () => IdRouteRoute,
 } as any)
 
@@ -81,9 +148,33 @@ const IdProductsRoute = IdProductsImport.update({
   getParentRoute: () => IdRouteRoute,
 } as any)
 
+const IdOwnerRoute = IdOwnerImport.update({
+  id: '/owner',
+  path: '/owner',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
 const IdOrdersRoute = IdOrdersImport.update({
   id: '/orders',
   path: '/orders',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdLineItemRoute = IdLineItemImport.update({
+  id: '/lineItem',
+  path: '/lineItem',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdInventoryRoute = IdInventoryImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => IdRouteRoute,
+} as any)
+
+const IdIngredientRoute = IdIngredientImport.update({
+  id: '/ingredient',
+  path: '/ingredient',
   getParentRoute: () => IdRouteRoute,
 } as any)
 
@@ -158,11 +249,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdBusinessesImport
       parentRoute: typeof IdRouteImport
     }
+    '/$id/ingredient': {
+      id: '/$id/ingredient'
+      path: '/ingredient'
+      fullPath: '/$id/ingredient'
+      preLoaderRoute: typeof IdIngredientImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/inventory': {
+      id: '/$id/inventory'
+      path: '/inventory'
+      fullPath: '/$id/inventory'
+      preLoaderRoute: typeof IdInventoryImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/lineItem': {
+      id: '/$id/lineItem'
+      path: '/lineItem'
+      fullPath: '/$id/lineItem'
+      preLoaderRoute: typeof IdLineItemImport
+      parentRoute: typeof IdRouteImport
+    }
     '/$id/orders': {
       id: '/$id/orders'
       path: '/orders'
       fullPath: '/$id/orders'
       preLoaderRoute: typeof IdOrdersImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/owner': {
+      id: '/$id/owner'
+      path: '/owner'
+      fullPath: '/$id/owner'
+      preLoaderRoute: typeof IdOwnerImport
       parentRoute: typeof IdRouteImport
     }
     '/$id/products': {
@@ -179,6 +298,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdPurchaseOrderImport
       parentRoute: typeof IdRouteImport
     }
+    '/$id/recipe': {
+      id: '/$id/recipe'
+      path: '/recipe'
+      fullPath: '/$id/recipe'
+      preLoaderRoute: typeof IdRecipeImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/recipeIngredint': {
+      id: '/$id/recipeIngredint'
+      path: '/recipeIngredint'
+      fullPath: '/$id/recipeIngredint'
+      preLoaderRoute: typeof IdRecipeIngredintImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/restaurant': {
+      id: '/$id/restaurant'
+      path: '/restaurant'
+      fullPath: '/$id/restaurant'
+      preLoaderRoute: typeof IdRestaurantImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/salesTransaction': {
+      id: '/$id/salesTransaction'
+      path: '/salesTransaction'
+      fullPath: '/$id/salesTransaction'
+      preLoaderRoute: typeof IdSalesTransactionImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/stockLocation': {
+      id: '/$id/stockLocation'
+      path: '/stockLocation'
+      fullPath: '/$id/stockLocation'
+      preLoaderRoute: typeof IdStockLocationImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/storageArea': {
+      id: '/$id/storageArea'
+      path: '/storageArea'
+      fullPath: '/$id/storageArea'
+      preLoaderRoute: typeof IdStorageAreaImport
+      parentRoute: typeof IdRouteImport
+    }
     '/$id/supplier': {
       id: '/$id/supplier'
       path: '/supplier'
@@ -186,11 +347,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdSupplierImport
       parentRoute: typeof IdRouteImport
     }
+    '/$id/timeSheet': {
+      id: '/$id/timeSheet'
+      path: '/timeSheet'
+      fullPath: '/$id/timeSheet'
+      preLoaderRoute: typeof IdTimeSheetImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/transferRecord': {
+      id: '/$id/transferRecord'
+      path: '/transferRecord'
+      fullPath: '/$id/transferRecord'
+      preLoaderRoute: typeof IdTransferRecordImport
+      parentRoute: typeof IdRouteImport
+    }
     '/$id/users': {
       id: '/$id/users'
       path: '/users'
       fullPath: '/$id/users'
       preLoaderRoute: typeof IdUsersImport
+      parentRoute: typeof IdRouteImport
+    }
+    '/$id/wasteRecord': {
+      id: '/$id/wasteRecord'
+      path: '/wasteRecord'
+      fullPath: '/$id/wasteRecord'
+      preLoaderRoute: typeof IdWasteRecordImport
       parentRoute: typeof IdRouteImport
     }
     '/$id/': {
@@ -209,11 +391,24 @@ interface IdRouteRouteChildren {
   IdAssetMaintenanceRoute: typeof IdAssetMaintenanceRoute
   IdAssetsRoute: typeof IdAssetsRoute
   IdBusinessesRoute: typeof IdBusinessesRoute
+  IdIngredientRoute: typeof IdIngredientRoute
+  IdInventoryRoute: typeof IdInventoryRoute
+  IdLineItemRoute: typeof IdLineItemRoute
   IdOrdersRoute: typeof IdOrdersRoute
+  IdOwnerRoute: typeof IdOwnerRoute
   IdProductsRoute: typeof IdProductsRoute
   IdPurchaseOrderRoute: typeof IdPurchaseOrderRoute
+  IdRecipeRoute: typeof IdRecipeRoute
+  IdRecipeIngredintRoute: typeof IdRecipeIngredintRoute
+  IdRestaurantRoute: typeof IdRestaurantRoute
+  IdSalesTransactionRoute: typeof IdSalesTransactionRoute
+  IdStockLocationRoute: typeof IdStockLocationRoute
+  IdStorageAreaRoute: typeof IdStorageAreaRoute
   IdSupplierRoute: typeof IdSupplierRoute
+  IdTimeSheetRoute: typeof IdTimeSheetRoute
+  IdTransferRecordRoute: typeof IdTransferRecordRoute
   IdUsersRoute: typeof IdUsersRoute
+  IdWasteRecordRoute: typeof IdWasteRecordRoute
   IdIndexRoute: typeof IdIndexRoute
 }
 
@@ -221,11 +416,24 @@ const IdRouteRouteChildren: IdRouteRouteChildren = {
   IdAssetMaintenanceRoute: IdAssetMaintenanceRoute,
   IdAssetsRoute: IdAssetsRoute,
   IdBusinessesRoute: IdBusinessesRoute,
+  IdIngredientRoute: IdIngredientRoute,
+  IdInventoryRoute: IdInventoryRoute,
+  IdLineItemRoute: IdLineItemRoute,
   IdOrdersRoute: IdOrdersRoute,
+  IdOwnerRoute: IdOwnerRoute,
   IdProductsRoute: IdProductsRoute,
   IdPurchaseOrderRoute: IdPurchaseOrderRoute,
+  IdRecipeRoute: IdRecipeRoute,
+  IdRecipeIngredintRoute: IdRecipeIngredintRoute,
+  IdRestaurantRoute: IdRestaurantRoute,
+  IdSalesTransactionRoute: IdSalesTransactionRoute,
+  IdStockLocationRoute: IdStockLocationRoute,
+  IdStorageAreaRoute: IdStorageAreaRoute,
   IdSupplierRoute: IdSupplierRoute,
+  IdTimeSheetRoute: IdTimeSheetRoute,
+  IdTransferRecordRoute: IdTransferRecordRoute,
   IdUsersRoute: IdUsersRoute,
+  IdWasteRecordRoute: IdWasteRecordRoute,
   IdIndexRoute: IdIndexRoute,
 }
 
@@ -240,11 +448,24 @@ export interface FileRoutesByFullPath {
   '/$id/assetMaintenance': typeof IdAssetMaintenanceRoute
   '/$id/assets': typeof IdAssetsRoute
   '/$id/businesses': typeof IdBusinessesRoute
+  '/$id/ingredient': typeof IdIngredientRoute
+  '/$id/inventory': typeof IdInventoryRoute
+  '/$id/lineItem': typeof IdLineItemRoute
   '/$id/orders': typeof IdOrdersRoute
+  '/$id/owner': typeof IdOwnerRoute
   '/$id/products': typeof IdProductsRoute
   '/$id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/$id/recipe': typeof IdRecipeRoute
+  '/$id/recipeIngredint': typeof IdRecipeIngredintRoute
+  '/$id/restaurant': typeof IdRestaurantRoute
+  '/$id/salesTransaction': typeof IdSalesTransactionRoute
+  '/$id/stockLocation': typeof IdStockLocationRoute
+  '/$id/storageArea': typeof IdStorageAreaRoute
   '/$id/supplier': typeof IdSupplierRoute
+  '/$id/timeSheet': typeof IdTimeSheetRoute
+  '/$id/transferRecord': typeof IdTransferRecordRoute
   '/$id/users': typeof IdUsersRoute
+  '/$id/wasteRecord': typeof IdWasteRecordRoute
   '/$id/': typeof IdIndexRoute
 }
 
@@ -255,11 +476,24 @@ export interface FileRoutesByTo {
   '/$id/assetMaintenance': typeof IdAssetMaintenanceRoute
   '/$id/assets': typeof IdAssetsRoute
   '/$id/businesses': typeof IdBusinessesRoute
+  '/$id/ingredient': typeof IdIngredientRoute
+  '/$id/inventory': typeof IdInventoryRoute
+  '/$id/lineItem': typeof IdLineItemRoute
   '/$id/orders': typeof IdOrdersRoute
+  '/$id/owner': typeof IdOwnerRoute
   '/$id/products': typeof IdProductsRoute
   '/$id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/$id/recipe': typeof IdRecipeRoute
+  '/$id/recipeIngredint': typeof IdRecipeIngredintRoute
+  '/$id/restaurant': typeof IdRestaurantRoute
+  '/$id/salesTransaction': typeof IdSalesTransactionRoute
+  '/$id/stockLocation': typeof IdStockLocationRoute
+  '/$id/storageArea': typeof IdStorageAreaRoute
   '/$id/supplier': typeof IdSupplierRoute
+  '/$id/timeSheet': typeof IdTimeSheetRoute
+  '/$id/transferRecord': typeof IdTransferRecordRoute
   '/$id/users': typeof IdUsersRoute
+  '/$id/wasteRecord': typeof IdWasteRecordRoute
   '/$id': typeof IdIndexRoute
 }
 
@@ -272,11 +506,24 @@ export interface FileRoutesById {
   '/$id/assetMaintenance': typeof IdAssetMaintenanceRoute
   '/$id/assets': typeof IdAssetsRoute
   '/$id/businesses': typeof IdBusinessesRoute
+  '/$id/ingredient': typeof IdIngredientRoute
+  '/$id/inventory': typeof IdInventoryRoute
+  '/$id/lineItem': typeof IdLineItemRoute
   '/$id/orders': typeof IdOrdersRoute
+  '/$id/owner': typeof IdOwnerRoute
   '/$id/products': typeof IdProductsRoute
   '/$id/purchaseOrder': typeof IdPurchaseOrderRoute
+  '/$id/recipe': typeof IdRecipeRoute
+  '/$id/recipeIngredint': typeof IdRecipeIngredintRoute
+  '/$id/restaurant': typeof IdRestaurantRoute
+  '/$id/salesTransaction': typeof IdSalesTransactionRoute
+  '/$id/stockLocation': typeof IdStockLocationRoute
+  '/$id/storageArea': typeof IdStorageAreaRoute
   '/$id/supplier': typeof IdSupplierRoute
+  '/$id/timeSheet': typeof IdTimeSheetRoute
+  '/$id/transferRecord': typeof IdTransferRecordRoute
   '/$id/users': typeof IdUsersRoute
+  '/$id/wasteRecord': typeof IdWasteRecordRoute
   '/$id/': typeof IdIndexRoute
 }
 
@@ -290,11 +537,24 @@ export interface FileRouteTypes {
     | '/$id/assetMaintenance'
     | '/$id/assets'
     | '/$id/businesses'
+    | '/$id/ingredient'
+    | '/$id/inventory'
+    | '/$id/lineItem'
     | '/$id/orders'
+    | '/$id/owner'
     | '/$id/products'
     | '/$id/purchaseOrder'
+    | '/$id/recipe'
+    | '/$id/recipeIngredint'
+    | '/$id/restaurant'
+    | '/$id/salesTransaction'
+    | '/$id/stockLocation'
+    | '/$id/storageArea'
     | '/$id/supplier'
+    | '/$id/timeSheet'
+    | '/$id/transferRecord'
     | '/$id/users'
+    | '/$id/wasteRecord'
     | '/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -304,11 +564,24 @@ export interface FileRouteTypes {
     | '/$id/assetMaintenance'
     | '/$id/assets'
     | '/$id/businesses'
+    | '/$id/ingredient'
+    | '/$id/inventory'
+    | '/$id/lineItem'
     | '/$id/orders'
+    | '/$id/owner'
     | '/$id/products'
     | '/$id/purchaseOrder'
+    | '/$id/recipe'
+    | '/$id/recipeIngredint'
+    | '/$id/restaurant'
+    | '/$id/salesTransaction'
+    | '/$id/stockLocation'
+    | '/$id/storageArea'
     | '/$id/supplier'
+    | '/$id/timeSheet'
+    | '/$id/transferRecord'
     | '/$id/users'
+    | '/$id/wasteRecord'
     | '/$id'
   id:
     | '__root__'
@@ -319,11 +592,24 @@ export interface FileRouteTypes {
     | '/$id/assetMaintenance'
     | '/$id/assets'
     | '/$id/businesses'
+    | '/$id/ingredient'
+    | '/$id/inventory'
+    | '/$id/lineItem'
     | '/$id/orders'
+    | '/$id/owner'
     | '/$id/products'
     | '/$id/purchaseOrder'
+    | '/$id/recipe'
+    | '/$id/recipeIngredint'
+    | '/$id/restaurant'
+    | '/$id/salesTransaction'
+    | '/$id/stockLocation'
+    | '/$id/storageArea'
     | '/$id/supplier'
+    | '/$id/timeSheet'
+    | '/$id/transferRecord'
     | '/$id/users'
+    | '/$id/wasteRecord'
     | '/$id/'
   fileRoutesById: FileRoutesById
 }
@@ -367,11 +653,24 @@ export const routeTree = rootRoute
         "/$id/assetMaintenance",
         "/$id/assets",
         "/$id/businesses",
+        "/$id/ingredient",
+        "/$id/inventory",
+        "/$id/lineItem",
         "/$id/orders",
+        "/$id/owner",
         "/$id/products",
         "/$id/purchaseOrder",
+        "/$id/recipe",
+        "/$id/recipeIngredint",
+        "/$id/restaurant",
+        "/$id/salesTransaction",
+        "/$id/stockLocation",
+        "/$id/storageArea",
         "/$id/supplier",
+        "/$id/timeSheet",
+        "/$id/transferRecord",
         "/$id/users",
+        "/$id/wasteRecord",
         "/$id/"
       ]
     },
@@ -393,8 +692,24 @@ export const routeTree = rootRoute
       "filePath": "$id/businesses.tsx",
       "parent": "/$id"
     },
+    "/$id/ingredient": {
+      "filePath": "$id/ingredient.tsx",
+      "parent": "/$id"
+    },
+    "/$id/inventory": {
+      "filePath": "$id/inventory.tsx",
+      "parent": "/$id"
+    },
+    "/$id/lineItem": {
+      "filePath": "$id/lineItem.tsx",
+      "parent": "/$id"
+    },
     "/$id/orders": {
       "filePath": "$id/orders.tsx",
+      "parent": "/$id"
+    },
+    "/$id/owner": {
+      "filePath": "$id/owner.tsx",
       "parent": "/$id"
     },
     "/$id/products": {
@@ -405,12 +720,48 @@ export const routeTree = rootRoute
       "filePath": "$id/purchaseOrder.tsx",
       "parent": "/$id"
     },
+    "/$id/recipe": {
+      "filePath": "$id/recipe.tsx",
+      "parent": "/$id"
+    },
+    "/$id/recipeIngredint": {
+      "filePath": "$id/recipeIngredint.tsx",
+      "parent": "/$id"
+    },
+    "/$id/restaurant": {
+      "filePath": "$id/restaurant.tsx",
+      "parent": "/$id"
+    },
+    "/$id/salesTransaction": {
+      "filePath": "$id/salesTransaction.tsx",
+      "parent": "/$id"
+    },
+    "/$id/stockLocation": {
+      "filePath": "$id/stockLocation.tsx",
+      "parent": "/$id"
+    },
+    "/$id/storageArea": {
+      "filePath": "$id/storageArea.tsx",
+      "parent": "/$id"
+    },
     "/$id/supplier": {
       "filePath": "$id/supplier.tsx",
       "parent": "/$id"
     },
+    "/$id/timeSheet": {
+      "filePath": "$id/timeSheet.tsx",
+      "parent": "/$id"
+    },
+    "/$id/transferRecord": {
+      "filePath": "$id/transferRecord.tsx",
+      "parent": "/$id"
+    },
     "/$id/users": {
       "filePath": "$id/users.tsx",
+      "parent": "/$id"
+    },
+    "/$id/wasteRecord": {
+      "filePath": "$id/wasteRecord.tsx",
       "parent": "/$id"
     },
     "/$id/": {

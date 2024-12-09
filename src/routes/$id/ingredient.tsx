@@ -10,9 +10,9 @@ export const Route = createFileRoute("/$id/ingredient")({
 function RouteComponent() {
   const ingredientType = {
     id: "",
-    name: "",
-    qauntity: "",
-    unit: "",
+    Name: "",
+    Qauntity: 0,
+    Unit: "",
   };
 
   const { data, isLoading, error } = useQuery({

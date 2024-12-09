@@ -34,19 +34,21 @@ function RouteComponent() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Attempting login..."); // Debug log
+    console.log("Attempting login...");
 
     try {
       const user = await login(credentials);
-      console.log("Login response:", user); // See exactly what we're getting back
-
       console.log("Login successful:", user);
 
-      navigate({
-        to: "/$id",
-        params: { id: user.id.toString() }, // Convert id to string
-        replace: true,
-      });
+      if (user && user.id) {
+        navigate({
+          to: "/$id",
+          params: { id: user.id.toString() },
+          replace: true,
+        });
+      } else {
+        console.error("Invalid user data received");
+      }
     } catch (err) {
       console.error("Login error:", err);
     }

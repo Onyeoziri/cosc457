@@ -11,7 +11,7 @@ export const Route = createFileRoute("/$id/assets")({
 
 function RouteComponent() {
   const { id } = Route.useParams();
-  const [accountsResult] = useAtom(accountsAtom);
+  const [accountsResult, refresh] = useAtom(accountsAtom);
 
   const assetType = {
     id: "",
@@ -37,7 +37,7 @@ function RouteComponent() {
   return (
     <div>
       <h1 className="text-center text-4xl mb-6">Assets</h1>
-      <DataTable type={assetType} data={data || []} />
+      <DataTable type={assetType} data={data || []} onDataChange={refresh} />
     </div>
   );
 }

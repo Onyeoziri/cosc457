@@ -34,7 +34,11 @@ function RouteComponent() {
 
   return (
     <div>
-      <h1 className="text-center text-4xl mb-6">Users</h1>
+      <div className="text-center mb-6">
+        <h1 className="text-4xl mb-4">Users</h1>
+        <p>Admin view only</p>
+      </div>
+
       <DataTable type={accountType} data={data || []} />
     </div>
   );

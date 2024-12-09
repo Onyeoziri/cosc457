@@ -8,6 +8,7 @@ import {
   SortingState,
   VisibilityState,
   useReactTable,
+  RowSelectionState,
 } from "@tanstack/react-table";
 import {
   DropdownMenu,
@@ -27,18 +28,27 @@ import { generateColumns } from "./columns";
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { supabase } from "@/utils/supabase";
+import { useToast } from "@/hooks/use-toast";
 
 interface DataTableProps<TData> {
   type: TData;
   data: TData[];
+  onDataChange?: () => void;
 }
 
-export function DataTable<TData extends object>({ type, data }: DataTableProps<TData>) {
+export function DataTable<TData extends object>({
+  type,
+  data,
+  onDataChange,
+}: DataTableProps<TData>) {
+  const { toast } = useToast();
   const columns = generateColumns(type);
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useReactTable({
     data,
@@ -50,13 +60,54 @@ export function DataTable<TData extends object>({ type, data }: DataTableProps<T
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
 
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   });
+
+  const handleDelete = async () => {
+    const selectedRows = table.getFilteredSelectedRowModel().rows;
+
+    if (selectedRows.length === 0) {
+      toast({
+        title: "No rows selected",
+        description: "Please select at least one row to delete.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const selectedIds = selectedRows.map((row) => row.original.id);
+
+    try {
+      const { error } = await supabase.from("Accounts").delete().in("id", selectedIds);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: `Successfully deleted ${selectedRows.length} row(s)`,
+      });
+
+      // Reset selection
+      setRowSelection({});
+
+      // Refresh data
+      onDataChange();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete selected rows. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Delete error:", error);
+    }
+  };
 
   return (
     <div className="rounded-md border">
@@ -100,7 +151,6 @@ export function DataTable<TData extends object>({ type, data }: DataTableProps<T
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
       <div className="rounded-md border">
         <Table>
           <TableHeader className="text-black">
@@ -139,7 +189,6 @@ export function DataTable<TData extends object>({ type, data }: DataTableProps<T
           </TableBody>
         </Table>
       </div>
-
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
@@ -157,7 +206,18 @@ export function DataTable<TData extends object>({ type, data }: DataTableProps<T
         >
           Next
         </Button>
-      </div>
+      </div>{" "}
+      <span className="">
+        <Button>Edit</Button>
+        <Button>Add</Button>
+        <Button
+          variant="destructive"
+          onClick={handleDelete}
+          disabled={!table.getFilteredSelectedRowModel().rows.length}
+        >
+          Delete Selected ({table.getFilteredSelectedRowModel().rows.length})
+        </Button>{" "}
+      </span>
     </div>
   );
 }

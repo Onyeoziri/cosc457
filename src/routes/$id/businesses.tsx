@@ -11,7 +11,7 @@ export const Route = createFileRoute("/$id/businesses")({
 
 function RouteComponent() {
   const { id } = Route.useParams();
-  const [accountsResult] = useAtom(accountsAtom);
+  const [accountsResult, refresh] = useAtom(accountsAtom);
 
   const businessType = {
     id: "",
@@ -35,8 +35,12 @@ function RouteComponent() {
   if (error) return <p>Error: {(error as Error).message}</p>;
   return (
     <div>
-      <h1 className="text-center text-4xl mb-6">Businesses</h1>
-      <DataTable type={businessType} data={data || []} />
+      <div className="text-center mb-6">
+        <h1 className="text-4xl mb-4">Businesses</h1>
+        <p>Admin view only</p>
+      </div>
+
+      <DataTable type={businessType} data={data || []} onDataChange={refresh} />
     </div>
   );
 }
